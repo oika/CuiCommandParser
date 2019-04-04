@@ -24,6 +24,8 @@ You should register the option informations by `RegisterOption` at first.
 Here is a sample to parse `mv` command.
 
 ```cs
+// $ mv -S=_bu note.txt child_dir/
+
 static void Main(string[] args)
 {
     var parser = new CommandParser();
@@ -56,14 +58,17 @@ static void Main(string[] args)
         //In case invalid params.
         return;
     }
+    
+    //parameters except options
+    var parameters = parsed.CommandParameters;   // -> [ "note.txt", "child_dir/" ]
 
     //check if it has an option. (all the same)
-    var forced = parsed.HasOption('f');
+    var forced = parsed.HasOption('f');          // -> false
     // var forced = parsed.HasOption("force");
     // var forced = parsed.HasOption(options[2]);
 
     //get an option's value. (all the same)
-    var suffix = parsed.GetOptionValue('S');
+    var suffix = parsed.GetOptionValue('S');     // -> "_bu"
     // var suffix = parsed.GetOptionValue("suffix");
     // var suffix = parsed.GetOptionValue(options[3]);
 }
