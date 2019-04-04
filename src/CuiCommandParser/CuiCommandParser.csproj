@@ -14,6 +14,13 @@
     <PackageProjectUrl>https://github.com/oika/CuiCommandParser</PackageProjectUrl>
     <RepositoryUrl>https://github.com/oika/CuiCommandParser</RepositoryUrl>
     <PackageTags>CUI CommandLine</PackageTags>
+    <NeutralLanguage>ja-JP</NeutralLanguage>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\oika\Documents\src\Libs\CuiCommandParser\src\CuiCommandParser\Oika.Libs.CuiCommandParser.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

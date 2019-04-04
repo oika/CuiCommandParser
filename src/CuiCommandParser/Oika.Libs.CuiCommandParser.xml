@@ -1,0 +1,450 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Oika.Libs.CuiCommandParser</name>
+    </assembly>
+    <members>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandOption">
+            <summary>
+            コマンドのオプション情報を格納するクラスです。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandOption.ShortName">
+            <summary>
+            短いオプション識別子を取得します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandOption.LongName">
+            <summary>
+            長いオプション識別子を取得します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandOption.ValueName">
+            <summary>
+            値をとるオプションであれば、その値の名称を取得します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandOption.Expression">
+            <summary>
+            このオプションの説明文を取得します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandOption.OptionKind">
+            <summary>
+            オプション種別を取得します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandOption.ShowsInUsage">
+            <summary>
+            このオプション情報をUsageに表示するかどうかを取得または設定します。
+            既定値はTrueです。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOption.#ctor(System.Nullable{System.Char},System.String,System.String,System.String,Oika.Libs.CuiCommandParser.CommandOptionKind)">
+            <summary>
+            コンストラクタです。
+            </summary>
+            <param name="shortName">短いオプション識別子を指定します。</param>
+            <param name="longName">長いオプション識別子を指定します。</param>
+            <param name="valueName">値をとるオプションであれば、その値の名称を指定します。</param>
+            <param name="expression">このオプションの説明文を指定します。</param>
+            <param name="kind">オプション種別を指定します。</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">kindに未定義の値が指定された場合にスローされます。</exception>
+            <exception cref="T:System.ArgumentException">shortNameとlongNameが両方とも指定されていない場合にスローされます。</exception>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandOption.NeededLeftColumnLength">
+            <summary>
+            Usage出力時に必要となる、コマンド部の半角文字数を取得します。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOption.ToString(System.Char,System.Int32)">
+            <summary>
+            Usageの出力使用される文字列表現を取得します。
+            </summary>
+            <param name="keyValSeparator"></param>
+            <param name="leftColumnWidth"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandOptionKind">
+            <summary>
+            コマンドオプション種別を表す列挙型です。
+            </summary>
+        </member>
+        <member name="F:Oika.Libs.CuiCommandParser.CommandOptionKind.NoValue">
+            <summary>
+            値を取らないオプションを表します。
+            </summary>
+        </member>
+        <member name="F:Oika.Libs.CuiCommandParser.CommandOptionKind.NeedsValue">
+            <summary>
+            値を必要とするオプションを表します。
+            </summary>
+        </member>
+        <member name="F:Oika.Libs.CuiCommandParser.CommandOptionKind.HasOptionalValue">
+            <summary>
+            任意で値を指定できるオプションを表します。
+            </summary>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandParser">
+            <summary>
+            コマンドライン実行時のパラメータ解析を行うクラスです。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandParser.IgnoresCase">
+            <summary>
+            大文字小文字の違いを無視するかどうかを取得します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandParser.LongNameOptionSymbol">
+            <summary>
+            長い名前でオプションを指定する際のプレフィックスを取得または設定します。
+            既定値は"--"です。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandParser.ShortNameOptionSymbol">
+            <summary>
+            短い名前でオプションを指定する際のプレフィックスを取得または設定します。
+            既定値は"-"です。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandParser.IgnoresUnknownOptions">
+            <summary>
+            不明なオプションを無視するかどうかを取得または設定します。
+            この値がFalseの場合、解析対象に不明なオプションが含まれていれば例外をスローします。
+            既定値はFalseです。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandParser.OptionKeyValueSeparators">
+            <summary>
+            オプションのキーと値を区切る文字のリストを取得または設定します。
+            既定では'='および半角スペースを含みます。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandParser.#ctor(System.Boolean)">
+            <summary>
+            コンストラクタです。
+            </summary>
+            <param name="ignoresCase">大文字小文字の違いを無視するかどうかを指定します。</param>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandParser.RegisterOption(Oika.Libs.CuiCommandParser.CommandOption)">
+            <summary>
+            オプション情報を追加します。
+            </summary>
+            <param name="option"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException">キーの重複するオプションが登録されています。</exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandParser.NewUsageBuilder(System.String)">
+            <summary>
+            Usage文字列を生成するためのインスタンスを生成します。
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandParser.ParseCommandLineArgs">
+            <summary>
+            実行中アプリケーションのコマンドライン引数を解析します。
+            解析不能な場合はnullを返します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandParser.Parse(System.String[])">
+            <summary>
+            指定したコマンドライン引数を解析します。
+            解析不能な場合はnullを返します。
+            </summary>
+            <param name="args">コマンドライン引数（実行コマンド名の指定部を除く）を指定します。</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandParser.OptionKeyParseResult">
+            <summary>
+            オプションのキーとなる文字列の解析結果を格納するクラス
+            </summary>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandOptionKey">
+            <summary>
+            コマンドのオプションを識別するための情報を格納するクラスです。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOptionKey.#ctor(System.Nullable{System.Char},System.String,System.Boolean)">
+            <summary>
+            コンストラクタです。
+            </summary>
+            <param name="shortName"></param>
+            <param name="longName"></param>
+            <param name="ignoresCase"></param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOptionKey.MatchesWithShortName(System.Char)">
+            <summary>
+            指定した短い名称がこのインスタンスと一致するかどうかを取得します。
+            </summary>
+            <param name="shortName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOptionKey.MatchesWithLongName(System.String)">
+            <summary>
+            指定した長い名称がこのインスタンスと一致するかどうかを取得します。
+            </summary>
+            <param name="longName"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException">longNameに空文字を指定した際にスローされます。</exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOptionKey.Matches(Oika.Libs.CuiCommandParser.CommandOption)">
+            <summary>
+            指定したオプションのキーがこのインスタンスと一致するかどうかを取得します。
+            </summary>
+            <param name="option"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOptionKey.Equals(System.Object)">
+            <summary>
+            指定したオブジェクトがこのオブジェクトと等価かどうかを取得します。
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOptionKey.GetHashCode">
+            <summary>
+            ハッシュコードを取得します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandOptionKey.ToString(System.String,System.String)">
+            <summary>
+            このオブジェクトの文字列表現を返します。
+            </summary>
+            <param name="shortNameSymbol"></param>
+            <param name="longNameSymbol"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandUsageBuilder">
+            <summary>
+            コマンドのUsage表示文字列を生成するクラスです。
+            このクラスのインスタンスは<see cref="T:Oika.Libs.CuiCommandParser.CommandParser"/>の<see cref="M:Oika.Libs.CuiCommandParser.CommandParser.NewUsageBuilder(System.String)"/>から生成することができます。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandUsageBuilder.Summary">
+            <summary>
+            コマンドの概要を取得または設定します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandUsageBuilder.OptionKeyValueSeparator">
+            <summary>
+            オプションのキーと値を区切る文字を取得または設定します。
+            既定値は半角スペースです。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUsageBuilder.#ctor(System.String,Oika.Libs.CuiCommandParser.CommandOption[])">
+            <summary>
+            コンストラクタです。
+            </summary>
+            <param name="command">コマンド文字列を指定します。</param>
+            <param name="options">オプションリストを指定します。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUsageBuilder.AddUseCase(Oika.Libs.CuiCommandParser.CommandUseCase)">
+            <summary>
+            コマンドのユースケースを追加します。
+            </summary>
+            <param name="useCase">ユースケースを指定します。
+            ユースケースインスタンスは<see cref="M:Oika.Libs.CuiCommandParser.CommandUsageBuilder.NewUseCase"/>から生成することができます。</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUsageBuilder.NewUseCase">
+            <summary>
+            コマンドのユースケースインスタンスを生成します。
+            このインスタンスは<see cref="M:Oika.Libs.CuiCommandParser.CommandUseCase.NewArg(System.String)"/>から生成することもできます。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUsageBuilder.NewUseCaseArg(System.String)">
+            <summary>
+            コマンドユースケースのパラメータインスタンスを生成します。
+            このインスタンスは
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUsageBuilder.ToString">
+            <summary>
+            このインスタンスの文字列表現を返します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandUseCase">
+            <summary>
+            コマンドのユースケースを表すクラスです。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.#ctor(System.String,System.Char)">
+            <summary>
+            プロテクトコンストラクタです。
+            </summary>
+            <param name="command"></param>
+            <param name="optionKeyValueSeparator"></param>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.AddArg(Oika.Libs.CuiCommandParser.CommandUseCase.Argument)">
+            <summary>
+            ユースケースのパラメータを追加し、自身のインスタンスを返します。
+            </summary>
+            <param name="arg">パラメータインスタンスを指定します。
+            このインスタンスは<see cref="M:Oika.Libs.CuiCommandParser.CommandUseCase.NewArg(System.String)"/>から生成することができます。</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.NewArg(System.String)">
+            <summary>
+            ユースケースのパラメータインスタンスを生成します。
+            </summary>
+            <param name="name">パラメータ名称を指定します。</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.AddArg(System.String,System.Boolean,System.Boolean,System.String,System.Boolean)">
+            <summary>
+            ユースケースのパラメータ情報を追加し、自身のインスタンスを返します。
+            </summary>
+            <param name="name"></param>
+            <param name="isOptional"></param>
+            <param name="isMultiple"></param>
+            <param name="valueName"></param>
+            <param name="isValueOptional"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.WithSummary(System.String)">
+            <summary>
+            ユースケースの概要を設定し、自身のインスタンスを返します。
+            </summary>
+            <param name="summary"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.CommandUseCase.NeededLeftLength">
+            <summary>
+            このユースケースを文字列表現で出力した際に、概要以外の情報で
+            必要となる半角文字数を取得します。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.ToString(System.Int32)">
+            <summary>
+            このユースケースの文字列表現を返します。
+            </summary>
+            <param name="leftWidth"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.CommandUseCase.Argument">
+            <summary>
+            ユースケースのパラメータを表すクラスです。
+            このクラスのインスタンスは<see cref="M:Oika.Libs.CuiCommandParser.CommandUseCase.NewArg(System.String)"/>または
+            <see cref="M:Oika.Libs.CuiCommandParser.CommandUsageBuilder.NewUseCaseArg(System.String)"/>から生成することができます。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.Argument.#ctor(System.String,System.Char)">
+            <summary>
+            プロテクトコンストラクタです。
+            </summary>
+            <param name="name"></param>
+            <param name="optionKeyValueSeparator"></param>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.Argument.AsOptional">
+            <summary>
+            このパラメータにオプショナル表現を追加し、自身のインスタンスを返します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.Argument.AsMultiple">
+            <summary>
+            このパラメータに複数指定可能の表現を追加し、自身のインスタンスを返します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.Argument.Value(System.String,System.Boolean)">
+            <summary>
+            このパラメータに値の情報を追加し、自身のインスタンスを返します。
+            </summary>
+            <param name="valueName"></param>
+            <param name="isOptional"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.CommandUseCase.Argument.ToString">
+            <summary>
+            このユースケースの文字列表現を返します。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oika.Libs.CuiCommandParser.ParsedCommandInfo">
+            <summary>
+            解析されたコマンドの情報を格納するクラスです。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.ParsedCommandInfo.IgnoresCase">
+            <summary>
+            大文字小文字の違いが無視されているかどうかを取得します。
+            </summary>
+        </member>
+        <member name="P:Oika.Libs.CuiCommandParser.ParsedCommandInfo.CommandParameters">
+            <summary>
+            コマンドに指定されたオプション以外の引数を取得します。
+            </summary>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.ParsedCommandInfo.HasOption(System.String)">
+            <summary>
+            指定した長い名称のオプションが指定されたかどうかを取得します。
+            </summary>
+            <param name="longName"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException">longNameに空文字列を指定した際にスローされます。</exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.ParsedCommandInfo.HasOption(System.Char)">
+            <summary>
+            指定した短い名称のオプションが指定されたかどうかを取得します。
+            </summary>
+            <param name="shortName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.ParsedCommandInfo.HasOption(Oika.Libs.CuiCommandParser.CommandOption)">
+            <summary>
+            指定したオプションが指定されたかどうかを取得します。
+            </summary>
+            <param name="option"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.ParsedCommandInfo.GetOptionValue(System.String)">
+            <summary>
+            指定した長い名称のオプションとその値が指定されていれば、その値を取得します。
+            </summary>
+            <param name="longName"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException">longNameに空文字列を指定した際にスローされます。</exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.ParsedCommandInfo.GetOptionValue(System.Char)">
+            <summary>
+            指定した短い名称のオプションとその値が指定されていれば、その値を取得します。
+            </summary>
+            <param name="shortName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.ParsedCommandInfo.GetOptionValue(Oika.Libs.CuiCommandParser.CommandOption)">
+            <summary>
+            指定したオプションとその値が指定されていれば、その値を取得します。
+            </summary>
+            <param name="option"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Oika.Libs.CuiCommandParser.ParsedCommandInfo.#ctor(System.Boolean,System.Collections.Generic.IReadOnlyList{System.String},System.Collections.Generic.Dictionary{Oika.Libs.CuiCommandParser.CommandOptionKey,System.String})">
+            <summary>
+            プロテクトコンストラクタです。
+            </summary>
+            <param name="ignoresCase"></param>
+            <param name="commandParams"></param>
+            <param name="optionDic"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+    </members>
+</doc>
