@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Oika.Libs.CuiCommandParser</AssemblyName>
+    <RootNamespace>Oika.Libs.CuiCommandParser</RootNamespace>
+    <Copyright>oika</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageId>CuiCommandParser</PackageId>
+    <Authors>oika</Authors>
+    <Company>oika</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>A parser with usage builder for CUI command line parameters and options. .NET Standard</Description>
+    <PackageProjectUrl>https://github.com/oika/CuiCommandParser</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/oika/CuiCommandParser</RepositoryUrl>
+    <PackageTags>CUI CommandLine</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
